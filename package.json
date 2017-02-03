@@ -1,0 +1,19 @@
+{
+  "name": "globalxplorer-tile-enhancer",
+  "version": "0.0.1",
+  "description": "Enhance the satellite image GlobalXplorer serves you!",
+  "main": "enhance.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:ppseprus/globalxplorer-tile-enhancer.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "globalxplorer"
+  ],
+  "author": "ppseprus",
+  "license": "MIT"
+}
