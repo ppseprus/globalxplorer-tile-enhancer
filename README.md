@@ -6,8 +6,8 @@ This Chrome Extension is a tool that allows the user to enhance the satellite im
 
 ## How to Install
 
-1. You can checkout this repository and then navigate to "chrome://extensions" to "Load unpacked extension", over
-2. You can download it from the Chrome Web Store
+1. You can download it from the Chrome Web Store
+2. You can clone this repository and manually load the folder to Chrome: just navigate to "chrome://extensions" and click "Load unpacked extension", then select the cloned folder
 
 ## How to Use
 
