@@ -4,6 +4,9 @@
 	"version": "0.1",
 	"description": "Enhance the satellite image GlobalXplorer serves you!",
 	"author": "ppseprus",
+	"icons": {
+		"60": "globalxplorer.png"
+	},
 	"content_scripts": [
 		{
 			"matches": [
