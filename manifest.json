@@ -6,7 +6,11 @@
 	"description": "A tool that allows the user to enhance the satellite images on the GlobalXplorer° website",
 	"author": "ppseprus",
 	"icons": {
-		"60": "globalxplorer.png"
+		"16": "img/gx16.png",
+		"32": "img/gx32.png",
+		"96": "img/gx96.png",
+		"128": "img/gx128transparent.png",
+		"192": "img/gx192.png"
 	},
 	"content_scripts": [
 		{
