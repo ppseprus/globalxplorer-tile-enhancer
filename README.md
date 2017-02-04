@@ -4,6 +4,8 @@ _"GlobalXplorer° is an online platform that uses the power of the crowd to anal
 
 This Chrome Extension is a tool that allows the user to enhance the satellite images the website serves to the user.
 
+![](http://i.imgur.com/01zCigJ.gif)
+
 ## How to Install
 
 1. You can download it from the Chrome Web Store
