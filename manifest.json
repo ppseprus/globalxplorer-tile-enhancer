@@ -12,9 +12,6 @@
 			"matches": [
 				"https://www.globalxplorer.org/explore"
 			],
-			"css": [
-				"styles.css"
-			],
 			"js": [
 				"enhance.js"
 			],
