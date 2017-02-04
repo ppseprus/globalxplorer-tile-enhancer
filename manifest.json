@@ -1,6 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "GlobalXplorer° Tile Enhancer",
+	"short_name": "Tile Enhancer",
 	"version": "0.1.1",
 	"description": "A tool that allows the user to enhance the satellite images on the GlobalXplorer° website",
 	"author": "ppseprus",
