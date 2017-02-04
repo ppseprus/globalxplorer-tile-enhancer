@@ -1,6 +1,6 @@
 {
   "name": "globalxplorer-tile-enhancer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tool that allows the user to enhance the satellite images on the GlobalXplorer° website",
   "main": "enhance.js",
   "scripts": {

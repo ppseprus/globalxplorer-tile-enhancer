@@ -25,7 +25,7 @@ document.onmousemove = e => {
 
     if (Math.abs(dx) <= range && Math.abs(dy) <= range) {
     	let brightness = scale(dx, maximumBrightness),
-    		contrast = scale(dy, maximumContrast);
+    		contrast = scale(-dy, maximumContrast);
 
     	setFitlers(brightness, contrast);
     } else {
