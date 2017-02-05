@@ -23,29 +23,13 @@ document.onmousemove = e => {
 		return 1 + (value / (range / boundary)) / 100;
 	};
 
-    if (Math.abs(dx) <= range && Math.abs(dy) <= range) {
-    	let brightness = scale(dx, maximumBrightness),
-    		contrast = scale(-dy, maximumContrast);
+	if (Math.abs(dx) <= range && Math.abs(dy) <= range) {
+		let brightness = scale(dx, maximumBrightness),
+			contrast = scale(-dy, maximumContrast);
 
-    	setFitlers(brightness, contrast);
-    } else {
+		setFitlers(brightness, contrast);
+	} else {
 
-    	setFitlers(1, 1);
-    }
+		setFitlers(1, 1);
+	}
 };
-
-let observer = new MutationObserver(mutations => {
-	mutations.forEach(mutation => {
-		if (document.getElementsByClassName('tile').length !== 1) {
-			return;
-		}
-
-		if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
-			setFitlers(1, 1);
-		}
-
-	});
-});
-
-observer.observe(document, { subtree: true, attributes: true });
-

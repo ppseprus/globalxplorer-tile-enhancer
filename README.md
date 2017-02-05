@@ -15,4 +15,4 @@ B. You can clone this repository and manually load the folder to Chrome: just na
 ## How to Use
 
 While inside the highlighted area, by moving the mouse away from the center of the image horizontally, the user can either increase or decrease the brightness of the tile. Doing the same thing vertically will give control over the contrast.
-Moving the mouse outside the highlighted area will set everything back to default, as well as when a new satellite image is given.
+Moving the mouse outside the highlighted area will set everything back to default.
