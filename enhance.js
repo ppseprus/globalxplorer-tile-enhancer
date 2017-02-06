@@ -1,8 +1,8 @@
 const maximumBrightness = 30;
 const maximumContrast = 15;
 
-const getSumOfAttributes = listOfAttributes => {
-	return listOfAttributes.reduce((sum, attribute) => {
+const getSumOfAttributes = attributes => {
+	return attributes.reduce((sum, attribute) => {
 		return sum += parseFloat(attribute);
 	}, 0);
 };
@@ -44,7 +44,7 @@ const setFitlers = (brightness, contrast) => {
 		.setAttribute('style', `filter: brightness(${brightness}) contrast(${contrast});`);
 };
 
-document.onmousemove = e => {
+document.onmousemove = event => {
 	if (document.getElementsByClassName('tile').length !== 1) {
 		return;
 	}
@@ -53,10 +53,8 @@ document.onmousemove = e => {
 		polygon = getDimensions('tile-polygon'),
 		rangeX = polygon.innerWidth / 2,
 		rangeY = polygon.innerHeight / 2,
-		tileMidX = loader.midX,
-		tileMidY = loader.midY,
-		dx = e.clientX - tileMidX,
-		dy = e.clientY - tileMidY;
+		dx = event.clientX - loader.midX,
+		dy = event.clientY - loader.midY;
 
 	if (Math.abs(dx) <= rangeX && Math.abs(dy) <= rangeY) {
 		let brightness = scale(dx, rangeX, maximumBrightness),
