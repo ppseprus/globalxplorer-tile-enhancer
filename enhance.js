@@ -1,19 +1,42 @@
 const maximumBrightness = 30;
 const maximumContrast = 15;
 
-const getDimensions = (style, withMargin = true) => {
-	let width = parseFloat(style.width)
-			+ parseFloat(style.paddingLeft)
-			+ parseFloat(style.paddingRight),
-		height = parseFloat(style.height)
-			+ parseFloat(style.paddingTop)
-			+ parseFloat(style.paddingBottom);
+const getSumOfAttributes = listOfAttributes => {
+	return listOfAttributes.reduce((sum, attribute) => {
+		return sum += parseFloat(attribute);
+	}, 0);
+};
 
-	width += withMargin ? parseFloat(style.marginLeft) + parseFloat(style.marginRight) + parseFloat(style.borderWidth) : 0;
+const getDimensions = className => {
+	let element = document.getElementsByClassName(className)[0],
+		style = getComputedStyle(element);
 
-	height += + withMargin ? parseFloat(style.marginTop) + parseFloat(style.marginBottom) + parseFloat(style.borderWidth) : 0;
+	let offsetTop = element.getBoundingClientRect().top,
+		offsetLeft = element.getBoundingClientRect().left;
 
-	return [width, height];
+	let innerWidth = getSumOfAttributes([style.width, style.paddingLeft, style.paddingRight]),
+		innerHeight = getSumOfAttributes([style.height, style.paddingTop, style.paddingBottom]);
+
+	let outerWidth = innerWidth + getSumOfAttributes([style.marginLeft, style.marginRight, style.borderWidth]),
+		outerHeight = innerHeight + getSumOfAttributes([style.marginTop, style.marginBottom, style.borderWidth]);
+
+	let midX = offsetLeft + outerWidth / 2,
+		midY = offsetTop + outerHeight / 2;
+
+	return {
+		offsetTop: offsetTop,
+		offsetLeft: offsetLeft,
+		innerWidth: innerWidth,
+		innerHeight: innerHeight,
+		outerWidth: outerWidth,
+		outerHeight: outerHeight,
+		midX: midX,
+		midY: midY
+	};
+};
+
+const scale = (value, range, boundary) => {
+	return 1 + value / (range / boundary) / 100;
 };
 
 const setFitlers = (brightness, contrast) => {
@@ -26,24 +49,18 @@ document.onmousemove = e => {
 		return;
 	}
 
-	let loader = document.getElementsByClassName('tile-loader')[0],
-		polygon = document.getElementsByClassName('tile-polygon')[0],
-		[loaderWidth, loaderHeight] = getDimensions(getComputedStyle(polygon)),
-		[tileWidth, tileHeight] = getDimensions(getComputedStyle(polygon), false),
-		rangeX = tileWidth / 2,
-		rangeY = tileHeight / 2,
-		tileMidX = loader.getBoundingClientRect().left + loaderWidth / 2,
-		tileMidY = loader.getBoundingClientRect().top + loaderHeight / 2,
+	let loader = getDimensions('tile-loader'),
+		polygon = getDimensions('tile-polygon'),
+		rangeX = polygon.innerWidth / 2,
+		rangeY = polygon.innerHeight / 2,
+		tileMidX = loader.midX,
+		tileMidY = loader.midY,
 		dx = e.clientX - tileMidX,
 		dy = e.clientY - tileMidY;
 
-	const scale = (value, boundary) => {
-		return 1 + (value / ((rangeX + rangeY) / 2 / boundary)) / 100;
-	};
-
 	if (Math.abs(dx) <= rangeX && Math.abs(dy) <= rangeY) {
-		let brightness = scale(dx, maximumBrightness),
-			contrast = scale(-dy, maximumContrast);
+		let brightness = scale(dx, rangeX, maximumBrightness),
+			contrast = scale(-dy, rangeY, maximumContrast);
 
 		setFitlers(brightness, contrast);
 	} else {
