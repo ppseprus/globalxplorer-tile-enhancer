@@ -1,8 +1,8 @@
-# GlobalXplorer° Tile Enhancer
+# Tile Enhancer
 
 _"GlobalXplorer° is an online platform that uses the power of the crowd to analyze the incredible wealth of satellite images currently available to archaeologists."_ — https://www.globalxplorer.org/about
 
-This Chrome Extension is a tool that allows the user to enhance the satellite images the website serves to the user.
+This Chrome Extension is an unofficial tool that allows the user to enhance the satellite images the website serves to the user.
 
 ![](http://i.imgur.com/01zCigJ.gif)
 
