@@ -8,7 +8,7 @@ This Chrome Extension is an unofficial tool that allows the user to enhance the 
 
 ## How to Install
 
-A. You can download it from the Chrome Web Store
+A. You can [download it](https://chrome.google.com/webstore/detail/tile-enhancer/ajgnkhkpjjmbhpdaacbhfdnhpkponcob) from the Chrome Web Store
 
 B. You can clone this repository and manually load the folder to Chrome: just navigate to "chrome://extensions" and click "Load unpacked extension", then select the cloned folder
 
