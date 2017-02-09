@@ -42,7 +42,8 @@ const scale = (value, range, boundary) => {
 };
 
 const setFitlers = (brightness, contrast) => {
-	document.getElementsByClassName('tile')[0]
+	document
+		.getElementsByClassName('tile')[0]
 		.setAttribute('style', `filter: brightness(${brightness}) contrast(${contrast});`);
 };
 
@@ -69,15 +70,12 @@ const enhancementHandler = event => {
 	}
 };
 
-const isMatching = () => {
+const isUrlEnabled = () => {
 	return document.location.href.indexOf(enabledUrlPartial) > -1;
 };
 
-const init = () => {
-	document.onmousemove = null;
-	if (isMatching()) {
-		document.onmousemove = enhancementHandler;
-	}
+const toggle = () => {
+	document.onmousemove = isUrlEnabled() ? enhancementHandler : null;
 };
 
 chrome
@@ -85,8 +83,8 @@ chrome
 	.onMessage
 	.addListener(message => {
 		if (message.sync === 'enhancejs') {
-			init();
+			toggle();
 		}
 	});
 
-init();
+toggle();
