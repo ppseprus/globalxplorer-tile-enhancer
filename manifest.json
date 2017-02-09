@@ -4,15 +4,24 @@
 	"version": "0.1.6",
 	"description": "An unofficial tool that allows the user to enhance the satellite images on the GlobalXplorer° website",
 	"author": "ppseprus",
+	"background": {
+		"scripts": [
+			"background.js"
+		]
+	},
 	"content_scripts": [
 		{
 			"matches": [
-				"https://www.globalxplorer.org/explore"
+				"https://www.globalxplorer.org/*"
 			],
 			"js": [
 				"enhance.js"
 			],
 			"run_at": "document_end"
 		}
+	],
+	"permissions": [
+		"webNavigation",
+		"tabs"
 	]
 }
