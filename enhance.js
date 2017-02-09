@@ -1,6 +1,8 @@
 const maximumBrightness = 30;
 const maximumContrast = 15;
 
+const enabledUrlPartial = 'globalxplorer.org/explore';
+
 const getSumOfAttributes = attributes => {
 	return attributes.reduce((sum, attribute) => {
 		return sum += parseFloat(attribute);
@@ -44,7 +46,7 @@ const setFitlers = (brightness, contrast) => {
 		.setAttribute('style', `filter: brightness(${brightness}) contrast(${contrast});`);
 };
 
-document.onmousemove = event => {
+const enhancementHandler = event => {
 	if (document.getElementsByClassName('tile').length !== 1) {
 		return;
 	}
@@ -66,3 +68,25 @@ document.onmousemove = event => {
 		setFitlers(1, 1);
 	}
 };
+
+const isMatching = () => {
+	return document.location.href.indexOf(enabledUrlPartial) > -1;
+};
+
+const init = () => {
+	document.onmousemove = null;
+	if (isMatching()) {
+		document.onmousemove = enhancementHandler;
+	}
+};
+
+chrome
+	.runtime
+	.onMessage
+	.addListener(message => {
+		if (message.sync === 'enhancejs') {
+			init();
+		}
+	});
+
+init();
