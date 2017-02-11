@@ -14,6 +14,9 @@
 			"matches": [
 				"https://www.globalxplorer.org/*"
 			],
+			"css": [
+				"styles.css"
+			],
 			"js": [
 				"enhance.js"
 			],

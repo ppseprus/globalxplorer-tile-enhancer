@@ -1,0 +1,10 @@
+.tile-enhancement-legend {
+	position: fixed;
+	width: 50px;
+	height: 18px;
+	margin: 2px;
+	padding: 2px;
+	text-align: right;
+	background-color: #ffffff;
+	opacity: .5;
+}
