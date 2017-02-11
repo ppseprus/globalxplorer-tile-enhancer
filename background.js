@@ -1,8 +1,8 @@
 chrome
 	.webNavigation
 	.onHistoryStateUpdated
-	.addListener(stateDetails => {
+	.addListener(details => {
 		chrome
 			.tabs
-			.sendMessage(stateDetails.tabId, { sync: 'enhancejs' });
+			.sendMessage(details.tabId, { sync: 'enhancejs' });
 	});
