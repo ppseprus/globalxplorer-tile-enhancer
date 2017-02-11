@@ -1,8 +1,6 @@
 const enabledUrlPartial = 'globalxplorer.org/explore';
 const maximumBrightness = 30;
 const maximumContrast = 15;
-const defaultBarWidth = 50;
-const defaultBarHeight = 18;
 
 let horizontalLegend,
 	verticalLegend;
@@ -33,9 +31,12 @@ const hideLegends = () => {
 };
 
 const positionLegends = legends => {
-	horizontalLegend.setAttribute('style', `top: ${legends.horizontal.top}px; left: ${legends.horizontal.left - defaultBarWidth / 2}px;`);
+	let legendWidth = parseFloat(getComputedStyle(horizontalLegend).width),
+		legendHeight = parseFloat(getComputedStyle(verticalLegend).height);
+
+	horizontalLegend.setAttribute('style', `top: ${legends.horizontal.top}px; left: ${legends.horizontal.left - legendWidth / 2}px;`);
 	horizontalLegend.textContent = asPercentage(legends.horizontal.value);
-	verticalLegend.setAttribute('style', `top: ${legends.vertical.top - defaultBarHeight / 2}px; left: ${legends.vertical.left}px;`);
+	verticalLegend.setAttribute('style', `top: ${legends.vertical.top - legendHeight / 2}px; left: ${legends.vertical.left}px;`);
 	verticalLegend.textContent = asPercentage(legends.vertical.value);
 };
 
