@@ -1,7 +1,43 @@
+const enabledUrlPartial = 'globalxplorer.org/explore';
 const maximumBrightness = 30;
 const maximumContrast = 15;
+const defaultBarWidth = 50;
+const defaultBarHeight = 18;
 
-const enabledUrlPartial = 'globalxplorer.org/explore';
+let horizontalLegend,
+	verticalLegend;
+
+const asPercentage = number => {
+	return (number * 100).toFixed(1) + '%';
+};
+
+const injectLegends = () => {
+	if (document.getElementsByClassName('tile-enhancement-legend').length === 2) {
+		return;
+	}
+
+	horizontalLegend = document.createElement('div');
+	horizontalLegend.className = 'tile-enhancement-legend';
+	horizontalLegend.id = 'horizontal-legend';
+	document.body.appendChild(horizontalLegend);
+
+	verticalLegend = document.createElement('div');
+	verticalLegend.className = 'tile-enhancement-legend';
+	verticalLegend.id = 'vertical-legend';
+	document.body.appendChild(verticalLegend);
+};
+
+const hideLegends = () => {
+	horizontalLegend.setAttribute('style', 'display: none;');
+	verticalLegend.setAttribute('style', 'display: none;');
+};
+
+const positionLegends = legends => {
+	horizontalLegend.setAttribute('style', `top: ${legends.horizontal.top}px; left: ${legends.horizontal.left - defaultBarWidth / 2}px;`);
+	horizontalLegend.textContent = asPercentage(legends.horizontal.value);
+	verticalLegend.setAttribute('style', `top: ${legends.vertical.top - defaultBarHeight / 2}px; left: ${legends.vertical.left}px;`);
+	verticalLegend.textContent = asPercentage(legends.vertical.value);
+};
 
 const getSumOfAttributes = attributes => {
 	return attributes.reduce((sum, attribute) => {
@@ -52,6 +88,8 @@ const enhancementHandler = event => {
 		return;
 	}
 
+	injectLegends();
+
 	let loader = getDimensions('tile-loader'),
 		polygon = getDimensions('tile-polygon'),
 		rangeX = polygon.innerWidth / 2,
@@ -63,10 +101,25 @@ const enhancementHandler = event => {
 		let brightness = scale(dx, rangeX, maximumBrightness),
 			contrast = scale(-dy, rangeY, maximumContrast);
 
+		let legends = {
+			horizontal: {
+				top: loader.midY + rangeY,
+				left: loader.midX + dx,
+				value: brightness
+			},
+			vertical: {
+				top: loader.midY + dy,
+				left: loader.midX + rangeX,
+				value: contrast
+			}
+		};
+
 		setFitlers(brightness, contrast);
+		positionLegends(legends);
 	} else {
 
 		setFitlers(1, 1);
+		hideLegends();
 	}
 };
 
