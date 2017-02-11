@@ -5,11 +5,11 @@ const maximumContrast = 15;
 let horizontalLegend,
 	verticalLegend;
 
-const asPercentage = number => {
+function asPercentage(number) {
 	return (number * 100).toFixed(1) + '%';
-};
+}
 
-const injectLegends = () => {
+function injectLegends() {
 	if (document.getElementsByClassName('tile-enhancement-legend').length === 2) {
 		return;
 	}
@@ -23,30 +23,30 @@ const injectLegends = () => {
 	verticalLegend.className = 'tile-enhancement-legend';
 	verticalLegend.id = 'vertical-legend';
 	document.body.appendChild(verticalLegend);
-};
+}
 
-const hideLegends = () => {
+function hideLegends() {
 	horizontalLegend.setAttribute('style', 'display: none;');
 	verticalLegend.setAttribute('style', 'display: none;');
-};
+}
 
-const positionLegends = legends => {
+function positionLegends(legends) {
 	let legendWidth = parseFloat(getComputedStyle(horizontalLegend).width),
-		legendHeight = parseFloat(getComputedStyle(verticalLegend).height);
+		legendHeight = parseFloatgetComputedStyle(verticalLegend).height);
 
 	horizontalLegend.setAttribute('style', `top: ${legends.horizontal.top}px; left: ${legends.horizontal.left - legendWidth / 2}px;`);
 	horizontalLegend.textContent = asPercentage(legends.horizontal.value);
 	verticalLegend.setAttribute('style', `top: ${legends.vertical.top - legendHeight / 2}px; left: ${legends.vertical.left}px;`);
 	verticalLegend.textContent = asPercentage(legends.vertical.value);
-};
+}
 
-const getSumOfAttributes = attributes => {
+function getSumOfAttributes(attributes) {
 	return attributes.reduce((sum, attribute) => {
 		return sum += parseFloat(attribute);
 	}, 0);
-};
+}
 
-const getDimensions = className => {
+function getDimensions(className) {
 	let element = document.getElementsByClassName(className)[0],
 		style = getComputedStyle(element);
 
@@ -72,19 +72,19 @@ const getDimensions = className => {
 		midX: midX,
 		midY: midY
 	};
-};
+}
 
-const scale = (value, range, boundary) => {
+function scale(value, range, boundary) {
 	return 1 + value / (range / boundary) / 100;
-};
+}
 
-const setFitlers = (brightness, contrast) => {
+function setFitlers(brightness, contrast) {
 	document
 		.getElementsByClassName('tile')[0]
 		.setAttribute('style', `filter: brightness(${brightness}) contrast(${contrast});`);
-};
+}
 
-const enhancementHandler = event => {
+function enhancementHandler(event) {
 	if (document.getElementsByClassName('tile').length !== 1) {
 		return;
 	}
@@ -122,15 +122,15 @@ const enhancementHandler = event => {
 		setFitlers(1, 1);
 		hideLegends();
 	}
-};
+}
 
-const isUrlEnabled = () => {
+function isUrlEnabled() {
 	return document.location.href.indexOf(enabledUrlPartial) > -1;
-};
+}
 
-const toggle = () => {
+function toggle() {
 	document.onmousemove = isUrlEnabled() ? enhancementHandler : null;
-};
+}
 
 chrome
 	.runtime
