@@ -32,7 +32,7 @@ function hideLegends() {
 
 function positionLegends(legends) {
 	let legendWidth = parseFloat(getComputedStyle(horizontalLegend).width),
-		legendHeight = parseFloatgetComputedStyle(verticalLegend).height);
+		legendHeight = parseFloat(getComputedStyle(verticalLegend).height);
 
 	horizontalLegend.setAttribute('style', `top: ${legends.horizontal.top}px; left: ${legends.horizontal.left - legendWidth / 2}px;`);
 	horizontalLegend.textContent = asPercentage(legends.horizontal.value);
