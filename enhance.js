@@ -2,7 +2,8 @@ const enabledUrlPartial = 'globalxplorer.org/explore';
 const maximumBrightness = 30;
 const maximumContrast = 15;
 
-let horizontalLegend,
+let tile,
+	horizontalLegend,
 	verticalLegend;
 
 function asPercentage(number) {
@@ -26,17 +27,22 @@ function injectLegends() {
 }
 
 function hideLegends() {
-	horizontalLegend.setAttribute('style', 'display: none;');
-	verticalLegend.setAttribute('style', 'display: none;');
+	horizontalLegend.style.display = 'none';
+	verticalLegend.style.display = 'none';
 }
 
 function positionLegends(legends) {
 	let legendWidth = parseFloat(getComputedStyle(horizontalLegend).width),
 		legendHeight = parseFloat(getComputedStyle(verticalLegend).height);
 
-	horizontalLegend.setAttribute('style', `top: ${legends.horizontal.top}px; left: ${legends.horizontal.left - legendWidth / 2}px;`);
+	horizontalLegend.style.display = 'block';
+	horizontalLegend.style.top = `${legends.horizontal.top}px`;
+	horizontalLegend.style.left = `${legends.horizontal.left - legendWidth / 2}px`;
 	horizontalLegend.textContent = asPercentage(legends.horizontal.value);
-	verticalLegend.setAttribute('style', `top: ${legends.vertical.top - legendHeight / 2}px; left: ${legends.vertical.left}px;`);
+
+	verticalLegend.style.display = 'block';
+	verticalLegend.style.top = `${legends.vertical.top - legendHeight / 2}px`;
+	verticalLegend.style.left = `${legends.vertical.left}px`;
 	verticalLegend.textContent = asPercentage(legends.vertical.value);
 }
 
@@ -79,14 +85,16 @@ function scale(value, range, boundary) {
 }
 
 function setFitlers(brightness, contrast) {
-	document
-		.getElementsByClassName('tile')[0]
-		.setAttribute('style', `filter: brightness(${brightness}) contrast(${contrast});`);
+	tile.style = `filter: brightness(${brightness}) contrast(${contrast});`;
 }
 
 function enhancementHandler(event) {
 	if (document.getElementsByClassName('tile').length !== 1) {
 		return;
+	}
+
+	if (tile === undefined) {
+		tile = document.getElementsByClassName('tile')[0];
 	}
 
 	injectLegends();
