@@ -10,7 +10,7 @@ function asPercentage(number) {
 }
 
 function injectLegends() {
-	if (document.getElementsByClassName('tile-enhancement-legend').length === 2) {
+	if (horizontalLegend !== undefined && verticalLegend !== undefined) {
 		return;
 	}
 
